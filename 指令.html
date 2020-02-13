@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+
+  <style>
+    div[v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div v-once>{{msg}},只渲染一次</div>
+    <div v-html="url"></div>
+    <div v-pre>{{msg}}</div>
+    <!--不会解析-->
+    <div v-text="msg"></div>
+    <div v-cloak>{{msg}}</div>
+    <!--vue渲染后会自动去除v-cloak属性，因此配合css使用-->
+  </div>
+  </template>
+
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello",
+        url: '<a href="http://www.baidu.com">百度一下</a>',
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>
