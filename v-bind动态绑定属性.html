@@ -1,77 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="js/vue.js"></script>
-  <style>
-    .active {
-      color: red;
-    }
-
-    .line {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-
-<body>
-  <div id="app">
-    <!--1.动态绑定属性-->
-    <a v-bind:href="aHref">百度</a>
-    <!--简写形式-->
-    <a :href="aHref">百度</a>
-
-
-    <!--动态绑定class-->
-    <!--字符串的形式-->
-    <div :class="on">你好啊</div>
-    <!--对象的形式-->
-    <!--语法  {类名:布尔值} -->
-    <div :class="{active:isActive,line:isLine}">对象的形式</div>
-    <!--如果对象太长，可以放到一个函数里返回  还可以是一个计算属性-->
-    <div class="title" :class="getClass()">哈哈</div>
-    <!--数组的形式-->
-    <div :class="[on,aaa]">数组的形式</div>
-
-
-    <!--练习 选项卡-->
-    <div>
-      <ul>
-        <li v-for="(m,index) in movies" :class="{active:i===index}" @click="changeClss(index)">{{m}}</li>
-      </ul>
-    </div>
-  </div>
-  <script>
-    const app = new Vue({
-      el: "#app",
-      data: {
-        aHref: "http://www.baidu.com",
-        on: 'active',
-        isActive: true,
-        isLine: true,
-        aaa: 'line',
-        movies: ['火影', '海贼', '哈利波特'],
-        i: 0
-      },
-      methods: {
-        getClass() { //返回一个class类的对象
-          return {
-            active: this.isActive,
-            line: this.isLine
-          } // 注意this
-        },
-        changeClss(index) {
-          this.i = index;
-        }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/vue.js"></script>
+    <style>
+      .active {
+        color: red;
       }
-    })
-  </script>
 
+      .line {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
 
+  <body>
+    <div id="app">
+      <!--1.动态绑定属性-->
+      <a v-bind:href="aHref">百度</a>
+      <!--简写形式-->
+      <a :href="aHref">百度</a>
 
-</body>
+      <!--动态绑定class-->
+      <!--字符串的形式-->
+      <div :class="on">你好啊</div>
+      <!--对象的形式-->
+      <!--语法  {类名:布尔值} -->
+      <div :class="{active:isActive,line:isLine}">对象的形式</div>
+      <!--如果对象太长，可以放到一个函数里返回  还可以是一个计算属性-->
+      <div class="title" :class="getClass()">哈哈</div>
+      <!--数组的形式-->
+      <div :class="[on,aaa]">数组的形式</div>
 
+      <!--练习 选项卡-->
+      <div>
+        <ul>
+          <li
+            v-for="(m,index) in movies"
+            :class="{active:i===index}"
+            @click="changeClss(index)"
+          >
+            {{m}}
+          </li>
+        </ul>
+      </div>
+
+      <!--动态绑定style-->
+      <!--1.对象语法-->
+      <!-- :style="{属性名:属性值}" -->
+      <div :style="{fontSize:fontVal+'px',color:colorVal}">
+        动态绑定style对象语法
+      </div>
+      <!--2.数组语法-->
+      <div :style="[aClass,bClass]">数组语法</div>
+    </div>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          aHref: 'http://www.baidu.com',
+          on: 'active',
+          isActive: true,
+          isLine: true,
+          aaa: 'line',
+          movies: ['火影', '海贼', '哈利波特'],
+          i: 0,
+          fontVal: 100,
+          colorVal: 'red',
+          aClass: { fontSize: '40px', color: 'green' },
+          bClass: { background: 'red' }
+        },
+        methods: {
+          getClass() {
+            //返回一个class类的对象
+            return {
+              active: this.isActive,
+              line: this.isLine
+            } // 注意this
+          },
+          changeClss(index) {
+            this.i = index
+          }
+        }
+      })
+    </script>
+  </body>
 </html>
