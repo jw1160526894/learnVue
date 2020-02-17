@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2> -->
+
+
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+  </div>
+  <script>
+    //计算属性有缓存，如果firstName和lastName的值没有变化，页面中执行4次计算属性和4次方法是有区别的，计算属性只会执行一次，而方法会执行多次，所以
+    //计算属性的性能更好
+    const app = new Vue({
+      el: "#app",
+      data: {
+        firstName: 'jiang',
+        lastName: 'wei'
+      },
+      methods: {
+        getFullName: function () {
+          console.log('getFullName执行了')
+          return this.firstName + ' ' + this.lastName;
+        }
+      },
+      computed: {
+        fullName: function () {
+          console.log('fullName执行了')
+          return this.firstName + ' ' + this.lastName;
+        }
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>

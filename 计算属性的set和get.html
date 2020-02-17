@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    {{fullName}}
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        firstName: 'jiang',
+        lastName: 'wei'
+      },
+      computed: {
+        fullName: {
+          get: function () {
+            return this.firstName + ' ' + this.lastName
+          },
+          set: function (newValue) { //修改fullName时调用,set函数一般不设置
+            const names = newValue.split(' ');
+            this.firstName = names[0];
+            this.lastName = names[1];
+          }
+
+        }
+        //计算属性为什么简写成函数的形式？ 本质它是一个属性
+        //因为set函数一般不设置，所以计算属性可以简写为这样
+        // fullName:function(){ 
+        //   return this.firstName + ' ' + this.lastName
+        // }
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>
