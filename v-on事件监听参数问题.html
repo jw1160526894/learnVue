@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--默认不加括号 会传入event对象-->
+    <button @click="show1">按钮1</button>
+    <!--加括号不传入参数，会报undefined-->
+    <button @click="show2()">按钮2</button>
+    <!--同时需要自定义参数和event对象 使用$event-->
+    <button @click="show3(msg,$event)">按钮3</button>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello"
+      },
+      methods: {
+        show1(event) {
+          console.log(event)
+        },
+        show2(event) {
+          console.log(event)
+        },
+        show3(aaa, event) {
+          console.log(aaa); //hello
+          console.log(event)
+        }
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>

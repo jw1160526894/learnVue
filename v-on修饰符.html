@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <!---1.stop修饰符，阻止事件冒泡-->
+    <div @click="divClick" style="width: 100px;height:100px;background:red">
+      <button @click.stop="btnClick">按钮</button>
+    </div>
+
+    <!--2.prevent阻止默认事件-->
+    <form action="./">
+      <button @click.prevent="submitClick" type="submit">提交</button>
+    </form>
+
+    <!--3.once只执行一次-->
+    <button @click.once="btn2Click">once修饰符</button>
+
+    <!--4.按键修饰符-->
+    <!-- <input type="text" @keyup.enter="inputEvent"> -->
+    <input type="text" @keyup.13="inputEvent">
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello"
+      },
+      methods: {
+        btnClick() {
+          console.log("btnClick")
+        },
+        divClick() {
+          console.log('divClick')
+        },
+        submitClick() {
+          console.log('submitClick')
+        },
+        btn2Click() {
+          console.log('只执行一次')
+        },
+        inputEvent() {
+          console.log('按了回车')
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
