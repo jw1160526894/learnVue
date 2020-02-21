@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <!--输入用户名后，切换为邮箱登录，input的值还保留着，这是由于vue做了一些复用，如果不希望保留，可以为input指定不同的
+  key来解决-->
+  <div id="app">
+    <div v-if="isUserName">
+      <label for="userName">用户名：</label>
+      <input type="text" id="userName" placeholder="请输入用户名" key="u">
+    </div>
+    <div v-else>
+      <label for="email">邮 箱：</label>
+      <input type="text" id="email" placeholder="请输入邮箱" key="e">
+    </div>
+    <button @click="isUserName=!isUserName">切换登录方式</button>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello",
+        isUserName: true
+      },
+
+    })
+  </script>
+
+
+</body>
+
+</html>
