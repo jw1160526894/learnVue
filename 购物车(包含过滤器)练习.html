@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      width: 600px;
+      border-collapse: collapse;
+      border: 1px solid;
+      margin: 20px auto;
+    }
+
+    tr {
+      text-align: center;
+    }
+
+    th,
+    td {
+      border: 1px solid;
+    }
+
+    button:disabled {
+      background: #ccc;
+    }
+  </style>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div v-if="books.length>0">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(book,index) in books">
+            <td>{{index+1}}</td>
+            <td>{{book.name}}</td>
+            <td>{{book.time}}</td>
+            <td>{{book.price | filterPrice}}</td>
+            <td><button :disabled="book.count<=1" @click="decrement(index)">-</button>{{book.count}}<button
+                @click="increment(index)">+</button>
+            </td>
+            <td><button @click="removeBook(index)">移除</button></td>
+          </tr>
+          <tr>
+            <td colspan="6">总价：{{totalPrice | filterPrice}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div v-else>购物车空了~</div>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        books: [{
+          id: 001,
+          name: '算法导论',
+          time: '2006-9',
+          price: '85',
+          count: 1
+        }, {
+          id: 002,
+          name: 'UNIX编程艺术',
+          time: '2006-2',
+          price: '59',
+          count: 1
+        }, {
+          id: 003,
+          name: '编程珠玑',
+          time: '2008-10',
+          price: '39',
+          count: 1
+        }, {
+          id: 004,
+          name: '代码大全',
+          time: '2006-3',
+          price: '128',
+          count: 1
+        }, ]
+
+      },
+      computed: {
+        totalPrice() {
+          let price = 0;
+          for (let i = 0; i < this.books.length; i++) {
+            price += parseFloat(this.books[i].price * this.books[i].count)
+          }
+          return price
+        }
+      },
+      methods: {
+        increment(index) {
+          this.books[index].count++;
+        },
+        decrement(index) {
+          this.books[index].count--;
+        },
+        removeBook(index) {
+          this.books.splice(index, 1)
+        }
+      },
+      filters: {
+        filterPrice(price) {
+          return "￥" + (parseFloat(price).toFixed(2))
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
