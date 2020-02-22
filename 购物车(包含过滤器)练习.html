@@ -70,35 +70,54 @@
           id: 001,
           name: '算法导论',
           time: '2006-9',
-          price: '85',
+          price: 85,
           count: 1
         }, {
           id: 002,
           name: 'UNIX编程艺术',
           time: '2006-2',
-          price: '59',
+          price: 59,
           count: 1
         }, {
           id: 003,
           name: '编程珠玑',
           time: '2008-10',
-          price: '39',
+          price: 39,
           count: 1
         }, {
           id: 004,
           name: '代码大全',
           time: '2006-3',
-          price: '128',
+          price: 128,
           count: 1
         }, ]
 
       },
       computed: {
         totalPrice() {
-          let price = 0;
-          for (let i = 0; i < this.books.length; i++) {
-            price += parseFloat(this.books[i].price * this.books[i].count)
-          }
+          // //方案一：使用数组的遍历
+          // let price = 0;
+          // //数组的遍历方法1：
+          // // for (let i = 0; i < this.books.length; i++) {
+          // //   price += this.books[i].price * this.books[i].count
+          // // }
+
+          // //2: 使用 ... in ...
+          // // for (let i in this.books) {
+          // //   price += this.books[i].price * this.books[i].count
+          // // }
+
+          // //3: 使用... of ...
+          // for (let item of this.books) {
+          //   price += item.price * item.count
+          // }
+          // return price
+
+          //方案二：使用reduce函数
+          let price = this.books.reduce(function (preVal, currenVal) {
+            console.log(preVal, currenVal);
+            return preVal + currenVal.price * currenVal.count
+          }, 0)
           return price
         }
       },
@@ -115,7 +134,7 @@
       },
       filters: {
         filterPrice(price) {
-          return "￥" + (parseFloat(price).toFixed(2))
+          return "￥" + (price).toFixed(2)
         }
       }
     })
