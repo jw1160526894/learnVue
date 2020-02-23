@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <cpt2></cpt2>
+  </div>
+  <script src='js/vue.js'></script>
+  <script>
+    //创建第一个组件构造器对象  （子组件）
+    const cptc1 = Vue.extend({
+      template: `
+        <div>
+          <h2>我是第一个组件标题</h2>  
+          <p>我是第一个组件内容</p>  
+        </div>
+      `
+    })
+
+    //创建第二个组件构造器对象 （父组件）
+    const cptc2 = Vue.extend({
+      template: `
+        <div>
+          <h2>我是第2个组件标题</h2>  
+          <p>我是第2个组件内容</p>  
+          <cpt1></cpt1>
+        </div>
+      `,
+      components: {
+        cpt1: cptc1
+      }
+    })
+
+    //注册全局组件
+    //Vue.component('cpt2', cptc2);
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello"
+      },
+      components: { //注册局部组件
+        cpt2: cptc2
+      }
+    })
+  </script>
+</body>
+
+</html>

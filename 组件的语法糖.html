@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+
+    <cpt1></cpt1>
+
+  </div>
+
+  <script src='js/vue.js'></script>
+  <script>
+    // 组件的语法糖就是省去了Vue.extend()的步骤而是直接使用一个对象来代替（注意 vue的内部还是调用Vue.extend()）
+
+    //全局注册
+    // Vue.component('cpt1', {
+    //   template: `
+    //     <div>
+    //       <h1>我是标题</h1>
+    //       <p>我是内容</p>
+    //     </div>
+    //   `
+    // })
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello"
+      },
+      components: {
+        cpt1: {
+          template: `
+            <div>
+              <h1>我是标题</h1>
+              <p>我是内容</p>
+            </div>
+          `
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

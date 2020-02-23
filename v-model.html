@@ -32,25 +32,33 @@
       <h2>{{isAgree}}</h2>
 
       <!--2.当做多选-->
-      <input
-        type="checkbox"
-        name="ball"
-        v-model="myball"
-        value="basketball"
-      />篮球
-      <input
-        type="checkbox"
-        name="ball"
-        v-model="myball"
-        value="football"
-      />足球
-      <input
-        type="checkbox"
-        name="ball"
-        v-model="myball"
-        value="pingpang"
-      />乒乓球
+      <label for="ball" v-for="ball in balls">
+        <input
+          type="checkbox"
+          id="ball"
+          name="ball"
+          :value="ball"
+          v-model="myball"
+        />
+      </label>
       <h2>{{myball}}</h2>
+
+      <!--select-->
+      <!--1.单选-->
+      <select name="movie" v-model="mylike">
+        <option value="haizeiwang">海贼王</option>
+        <option value="huoying">火影</option>
+        <option value="kenan">柯南</option>
+      </select>
+      <h2>{{mylike}}</h2>
+
+      <!--2.多选-->
+      <select name="movie" v-model="mylikes" multiple>
+        <option value="haizeiwang">海贼王</option>
+        <option value="huoying">火影</option>
+        <option value="kenan">柯南</option>
+      </select>
+      <h2>{{mylikes}}</h2>
     </div>
     <script>
       const app = new Vue({
@@ -59,7 +67,10 @@
           msg: 'hello',
           sex: '女',
           isAgree: true,
-          myball: []
+          myball: [],
+          balls: ['football', 'basketball', 'pingpang'],
+          mylike: [],
+          mylikes: []
         }
       })
     </script>

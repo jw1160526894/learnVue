@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="js/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!--1. .lazy（默认v-model双向数据绑定是实时更新数据的，加了.lazy修饰符只在敲回车或者失去焦点才有用）-->
+    <input type="text" v-model.lazy="msg">
+    <h2>{{msg}}</h2>
+
+    <!--2. .number 默认v-model的值是字符串 -->
+    <input type="text" v-model.number="num">
+    <h2>{{num}}--{{typeof num}}</h2>
+
+    <!--3. .trim去掉左右空格-->
+    <input type="text" v-model.trim="username">
+    <h2>{{username}}</h2>
+  </div>
+  <script>
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello",
+        num: '',
+        username: ''
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>
