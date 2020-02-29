@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!--父组件监听子组件发送过来的itemclick自定义事件-->
+    <cpt @itemclick="cpnClick"></cpt>
+  </div>
+
+  <template id="cpt">
+    <div>
+      <ul>
+        <li v-for="item in categries" @click="btnClick(item)">{{item.title}}</li>
+      </ul>
+    </div>
+  </template>
+
+  <script src='js/vue.js'></script>
+  <script>
+    const cpt = {
+      template: "#cpt",
+      data() {
+        return {
+          categries: [{
+              id: 101,
+              title: '日用百货'
+            },
+            {
+              id: 102,
+              title: '全部分类'
+            },
+            {
+              id: 103,
+              title: '家用电器'
+            },
+          ]
+        }
+      },
+      methods: {
+        btnClick(item) {
+          //console.log(item)
+          //子组件发送itemclick事件
+          this.$emit("itemclick", item)
+        }
+      }
+    }
+    const app = new Vue({
+      el: "#app",
+      data: {
+        msg: "hello",
+        info: [{
+            id: 101,
+            title: '日用百货'
+          },
+          {
+            id: 102,
+            title: '全部分类'
+          },
+          {
+            id: 103,
+            title: '家用电器'
+          },
+        ]
+      },
+      components: {
+        cpt
+      },
+      methods: {
+        cpnClick(item) {
+          console.log(item)
+        }
+      }
+    })
+  </script>
+
+
+</body>
+
+</html>
