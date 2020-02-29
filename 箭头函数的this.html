@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // setTimeout(function () {
+    //   console.log(this) //window
+    // }, 300)
+
+    // setTimeout(() => {
+    //   console.log(this) //window
+    // }, 300)
+
+    //箭头函数中的this 会一层一层的向上查找this，直到有this的定义
+
+    const obj = {
+      bb() {
+        setTimeout(() => {
+          console.log(this) // obj
+
+          setTimeout(() => {
+            console.log(this) //obj
+          }, 100)
+        }, 100)
+
+        setTimeout(function () {
+          console.log(this) //window
+
+          setTimeout(() => {
+            console.log(this) //window
+          })
+        })
+      }
+    }
+    obj.bb()
+  </script>
+</body>
+
+</html>
